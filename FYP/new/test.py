@@ -9,9 +9,14 @@ import torch.nn as nn
 import torch.optim as optim
 from sklearn.preprocessing import StandardScaler
 
-# Load the CSV files
-malignant_benign_df = pd.read_excel("FYP/new/malignant_benign.xlsx")
-tumor_no_tumor_df = pd.read_excel("FYP/new/tumor_no_tumor.xlsx")
+# # Load the CSV files
+# malignant_benign_df = pd.read_excel("FYP/new/malignant_benign.xlsx")
+# tumor_no_tumor_df = pd.read_excel("FYP/new/tumor_no_tumor.xlsx")
+
+data_path1 = os.path.join(os.path.dirname(__file__), "malignant_benign.xlsx")
+malignant_benign_df = pd.read_excel(data_path1)
+data_path2 = os.path.join(os.path.dirname(__file__), "tumor_no_tumor.xlsx")
+tumor_no_tumor_df = pd.read_excel(data_path2)
 
 
 class NeuralNet(nn.Module):
