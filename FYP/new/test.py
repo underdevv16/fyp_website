@@ -4,14 +4,14 @@ import pandas as pd
 import time
 import torch
 import pickle
-import torch
+import os
 import torch.nn as nn
 import torch.optim as optim
 from sklearn.preprocessing import StandardScaler
 
 # Load the CSV files
-malignant_benign_df = pd.read_excel("new\\malignant_benign.xlsx")
-tumor_no_tumor_df = pd.read_excel("new\\tumor_no_tumor.xlsx")
+malignant_benign_df = pd.read_excel("FYP/new/malignant_benign.xlsx")
+tumor_no_tumor_df = pd.read_excel("FYP/new/tumor_no_tumor.xlsx")
 
 
 class NeuralNet(nn.Module):
@@ -30,17 +30,34 @@ class NeuralNet(nn.Module):
         return x
 
 # Load models and scaler
-with open('new\\models\\malignant_v_benign_rf_model.pkl', 'rb') as model_file:
+# with open('new\\models\\malignant_v_benign_rf_model.pkl', 'rb') as model_file:
+#     rf_malignant_benign_model = pickle.load(model_file)
+
+# with open('new\\tumor_v_no_tumor_rf_model.pkl', 'rb') as model_file:
+#     rf_tumor_no_tumor_model = pickle.load(model_file)
+
+# with open('new\\tumor_v_no_tumor_rf_scaler.pkl', 'rb') as scaler_file:
+#     tumor_no_tumor_scaler = pickle.load(scaler_file)
+
+# # Load the neural network model, ensuring the class definition is present
+# with open('new\\models\\tumor_v_no_tumor_nn_model.pkl', 'rb') as model_file:
+#     nn_tumor_no_tumor_model = pickle.load(model_file)
+
+# Define base path
+base_path = os.path.join("FYP", "new")
+
+# Load models and scaler
+with open(os.path.join(base_path, "models", "malignant_v_benign_rf_model.pkl"), "rb") as model_file:
     rf_malignant_benign_model = pickle.load(model_file)
 
-with open('new\\tumor_v_no_tumor_rf_model.pkl', 'rb') as model_file:
+with open(os.path.join(base_path, "tumor_v_no_tumor_rf_model.pkl"), "rb") as model_file:
     rf_tumor_no_tumor_model = pickle.load(model_file)
 
-with open('new\\tumor_v_no_tumor_rf_scaler.pkl', 'rb') as scaler_file:
+with open(os.path.join(base_path, "tumor_v_no_tumor_rf_scaler.pkl"), "rb") as scaler_file:
     tumor_no_tumor_scaler = pickle.load(scaler_file)
 
 # Load the neural network model, ensuring the class definition is present
-with open('new\\models\\tumor_v_no_tumor_nn_model.pkl', 'rb') as model_file:
+with open(os.path.join(base_path, "models", "tumor_v_no_tumor_nn_model.pkl"), "rb") as model_file:
     nn_tumor_no_tumor_model = pickle.load(model_file)
 
 # Set up default state
