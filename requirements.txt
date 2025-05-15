@@ -8,10 +8,10 @@ joblib==1.5.0
 tqdm==4.67.1
 pickle-mixin
 
-# PyTorch CPU versions
+# PyTorch packages (CPU-only versions)
 torch==2.2.2+cpu
 torchvision==0.17.2+cpu
 torchaudio==2.2.2+cpu
 
-# Required for installing from PyTorch's index
+# Required to fetch from PyTorch's index (this line is CRUCIAL)
 --extra-index-url https://download.pytorch.org/whl/cpu
