@@ -162,7 +162,15 @@ if prediction_type:
                     rf_result = "No Tumor" if rf_pred == 0 else "Tumor"
 
                     # NN prediction
-                    nn_pred = nn_tumor_no_tumor_model(torch.tensor(input_data).float()).detach().numpy()
+                    # nn_pred = nn_tumor_no_tumor_model(torch.tensor(input_data).float()).detach().numpy()
+                    input_tensor = torch.tensor(input_data).float()
+                    output_tensor = nn_tumor_no_tumor_model(input_tensor).detach()
+                    
+                    try:
+                        nn_pred = output_tensor.numpy()
+                    except:
+                        nn_pred = output_tensor.item()
+                    
                     nn_result = "No Tumor" if nn_pred <= 0.5 else "Tumor"
 
                     st.info(f"🤖 RF Model: {nn_result}")
